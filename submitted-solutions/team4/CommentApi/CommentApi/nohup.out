@@ -1,0 +1,270 @@
+Restoring packages
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+Building the project
+Microsoft (R) Build Engine version 17.0.0-preview-21378-03+d592862ed for .NET
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+  You are using a preview version of .NET. See: https://aka.ms/dotnet-core-preview
+  CommentApi -> /home/hackathon/hackathonSeznamEasyPeasy/CommentApi/CommentApi/bin/Release/net6.0/CommentApi.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:01.24
+Running the project
+Microsoft (R) Build Engine version 17.0.0-preview-21378-03+d592862ed for .NET
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+  CommentApi -> /home/hackathon/hackathonSeznamEasyPeasy/CommentApi/CommentApi/bin/Release/net6.0/publish/
+Running the project
+Unhandled exception. Npgsql.NpgsqlException (0x80004005): Exception while connecting
+ ---> System.Net.Sockets.SocketException (0xFFFDFFFE): Unknown socket error
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.CreateException(SocketError error, Boolean forAsyncThrow) in System.Net.Sockets.dll:token 0x60002bb+0xa
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ConnectAsync(Socket socket) in System.Net.Sockets.dll:token 0x60002ae+0x32
+   at System.Net.Sockets.Socket.ConnectAsync(EndPoint remoteEP, CancellationToken cancellationToken) in System.Net.Sockets.dll:token 0x6000271+0x2f
+   at Npgsql.NpgsqlConnector.ConnectAsync(NpgsqlTimeout timeout, CancellationToken cancellationToken) in Npgsql.dll:token 0x6000432+0x21c
+   at System.Runtime.CompilerServices.AsyncMethodBuilderCore.Start[TStateMachine](TStateMachine& stateMachine) in System.Private.CoreLib.dll:token 0x6004d4b+0x28
+   at Npgsql.NpgsqlConnector.ConnectAsync(NpgsqlTimeout timeout, CancellationToken cancellationToken) in Npgsql.dll:token 0x6000432+0x2c
+   at Npgsql.NpgsqlConnector.RawOpen(NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken) in Npgsql.dll:token 0x6000430+0x38
+   at System.Runtime.CompilerServices.AsyncMethodBuilderCore.Start[TStateMachine](TStateMachine& stateMachine) in System.Private.CoreLib.dll:token 0x6004d4b+0x28
+   at Npgsql.NpgsqlConnector.RawOpen(NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken) in Npgsql.dll:token 0x6000430+0x34
+   at Npgsql.NpgsqlConnector.Open(NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken) in Npgsql.dll:token 0x600042c+0x38
+   at System.Runtime.CompilerServices.AsyncMethodBuilderCore.Start[TStateMachine](TStateMachine& stateMachine) in System.Private.CoreLib.dll:token 0x6004d4b+0x28
+   at Npgsql.NpgsqlConnector.Open(NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken) in Npgsql.dll:token 0x600042c+0x34
+   at Npgsql.ConnectorPool.OpenNewConnector(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken) in Npgsql.dll:token 0x60001fd+0x66
+   at System.Runtime.CompilerServices.AsyncMethodBuilderCore.Start[TStateMachine](TStateMachine& stateMachine) in System.Private.CoreLib.dll:token 0x6004d4b+0x28
+   at Npgsql.ConnectorPool.OpenNewConnector(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken) in Npgsql.dll:token 0x60001fd+0x3d
+   at Npgsql.ConnectorPool.<>c__DisplayClass38_0.<<Rent>g__RentAsync|0>d.MoveNext() in Npgsql.dll:token 0x60010cb+0x11
+   at System.Runtime.CompilerServices.AsyncMethodBuilderCore.Start[TStateMachine](TStateMachine& stateMachine) in System.Private.CoreLib.dll:token 0x6004d4b+0x28
+   at Npgsql.ConnectorPool.<>c__DisplayClass38_0.<Rent>g__RentAsync|0() in Npgsql.dll:token 0x6000d8d+0x1c
+   at Npgsql.ConnectorPool.Rent(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken) in Npgsql.dll:token 0x60001fa+0x38
+   at Npgsql.NpgsqlConnection.<>c__DisplayClass41_0.<<Open>g__OpenAsync|0>d.MoveNext() in Npgsql.dll:token 0x60010d1+0x1b9
+   at System.Runtime.CompilerServices.AsyncMethodBuilderCore.Start[TStateMachine](TStateMachine& stateMachine) in System.Private.CoreLib.dll:token 0x6004d4b+0x28
+   at Npgsql.NpgsqlConnection.<>c__DisplayClass41_0.<Open>g__OpenAsync|0(CancellationToken cancellationToken2) in Npgsql.dll:token 0x6000dd7+0x24
+   at Npgsql.NpgsqlConnection.Open(Boolean async, CancellationToken cancellationToken) in Npgsql.dll:token 0x60002d6+0xad
+   at Npgsql.NpgsqlConnection.OpenAsync(CancellationToken cancellationToken) in Npgsql.dll:token 0x60002d4+0x6
+   at System.Data.Common.DbConnection.OpenAsync() in System.Data.Common.dll:token 0x6001695+0x0
+   at CommentApi.Sql.MigrateSqlService.StartAsync(CancellationToken cancellationToken) in /home/hackathon/hackathonSeznamEasyPeasy/CommentApi/CommentApi/Sql/MigrateSqlService.cs:line 36
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.ExecutionContextCallback(Object s) in System.Private.CoreLib.dll:token 0x6004d76+0x0
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state) in System.Private.CoreLib.dll:token 0x6002df1+0x40
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext(Thread threadPoolThread) in System.Private.CoreLib.dll:token 0x6004d7a+0x3f
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext() in System.Private.CoreLib.dll:token 0x6004d79+0x0
+   at System.Threading.Tasks.AwaitTaskContinuation.RunOrScheduleAction(IAsyncStateMachineBox box, Boolean allowInlining) in System.Private.CoreLib.dll:token 0x60032ab+0x3b
+   at System.Threading.Tasks.Task.RunContinuations(Object continuationObject) in System.Private.CoreLib.dll:token 0x60031bd+0x65
+   at System.Threading.Tasks.Task.FinishContinuations() in System.Private.CoreLib.dll:token 0x60031bc+0x14
+   at System.Threading.Tasks.Task`1.TrySetResult(TResult result) in System.Private.CoreLib.dll:token 0x600309b+0x4b
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.SetExistingTaskResult(Task`1 task, TResult result) in System.Private.CoreLib.dll:token 0x6004d6e+0x0
+   at Npgsql.NpgsqlCommand.ExecuteNonQuery(Boolean async, CancellationToken cancellationToken) in Npgsql.dll:token 0x6000297+0x24d
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.ExecutionContextCallback(Object s) in System.Private.CoreLib.dll:token 0x6004d76+0x0
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state) in System.Private.CoreLib.dll:token 0x6002df1+0x40
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext(Thread threadPoolThread) in System.Private.CoreLib.dll:token 0x6004d7a+0x3f
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext() in System.Private.CoreLib.dll:token 0x6004d79+0x0
+   at System.Threading.Tasks.AwaitTaskContinuation.RunOrScheduleAction(IAsyncStateMachineBox box, Boolean allowInlining) in System.Private.CoreLib.dll:token 0x60032ab+0x3b
+   at System.Threading.Tasks.Task.RunContinuations(Object continuationObject) in System.Private.CoreLib.dll:token 0x60031bd+0x65
+   at System.Threading.Tasks.Task.FinishContinuations() in System.Private.CoreLib.dll:token 0x60031bc+0x14
+   at System.Threading.Tasks.Task`1.TrySetResult(TResult result) in System.Private.CoreLib.dll:token 0x600309b+0x4b
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken) in Npgsql.dll:token 0x60002a1+0x635
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.ExecutionContextCallback(Object s) in System.Private.CoreLib.dll:token 0x6004d76+0x0
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state) in System.Private.CoreLib.dll:token 0x6002df1+0x40
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext(Thread threadPoolThread) in System.Private.CoreLib.dll:token 0x6004d7a+0x3f
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext() in System.Private.CoreLib.dll:token 0x6004d79+0x0
+   at System.Threading.Tasks.AwaitTaskContinuation.RunOrScheduleAction(IAsyncStateMachineBox box, Boolean allowInlining) in System.Private.CoreLib.dll:token 0x60032ab+0x3b
+   at System.Threading.Tasks.Task.RunContinuations(Object continuationObject) in System.Private.CoreLib.dll:token 0x60031bd+0x65
+   at System.Threading.Tasks.Task.FinishContinuations() in System.Private.CoreLib.dll:token 0x60031bc+0x14
+   at System.Threading.Tasks.Task`1.TrySetResult(TResult result) in System.Private.CoreLib.dll:token 0x600309b+0x4b
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.SetExistingTaskResult(Task`1 task, TResult result) in System.Private.CoreLib.dll:token 0x6004d6e+0x0
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken) in Npgsql.dll:token 0x60004db+0x960
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.ExecutionContextCallback(Object s) in System.Private.CoreLib.dll:token 0x6004d76+0x0
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state) in System.Private.CoreLib.dll:token 0x6002df1+0x40
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext(Thread threadPoolThread) in System.Private.CoreLib.dll:token 0x6004d7a+0x3f
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext() in System.Private.CoreLib.dll:token 0x6004d79+0x0
+   at System.Threading.Tasks.AwaitTaskContinuation.RunOrScheduleAction(IAsyncStateMachineBox box, Boolean allowInlining) in System.Private.CoreLib.dll:token 0x60032ab+0x3b
+   at System.Threading.Tasks.Task.RunContinuations(Object continuationObject) in System.Private.CoreLib.dll:token 0x60031bd+0x65
+   at System.Threading.Tasks.Task.FinishContinuations() in System.Private.CoreLib.dll:token 0x60031bc+0x14
+   at System.Threading.Tasks.Task`1.TrySetResult(TResult result) in System.Private.CoreLib.dll:token 0x600309b+0x4b
+   at Npgsql.NpgsqlConnector.<ReadMessage>g__ReadMessageLong|194_0(NpgsqlConnector connector, Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage) in Npgsql.dll:token 0x6000484+0x51d
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.ExecutionContextCallback(Object s) in System.Private.CoreLib.dll:token 0x6004d76+0x0
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state) in System.Private.CoreLib.dll:token 0x6002df1+0x40
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext(Thread threadPoolThread) in System.Private.CoreLib.dll:token 0x6004d7a+0x3f
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext() in System.Private.CoreLib.dll:token 0x6004d79+0x0
+   at System.Threading.Tasks.AwaitTaskContinuation.RunOrScheduleAction(IAsyncStateMachineBox box, Boolean allowInlining) in System.Private.CoreLib.dll:token 0x60032ab+0x3b
+   at System.Threading.Tasks.Task.RunContinuations(Object continuationObject) in System.Private.CoreLib.dll:token 0x60031bd+0x65
+   at System.Threading.Tasks.Task.FinishContinuations() in System.Private.CoreLib.dll:token 0x60031bc+0x14
+   at System.Threading.Tasks.Task`1.TrySetResult(TResult result) in System.Private.CoreLib.dll:token 0x600309b+0x4b
+   at Npgsql.NpgsqlReadBuffer.<Ensure>g__EnsureLong|40_0(NpgsqlReadBuffer buffer, Int32 count, Boolean async, Boolean readingNotifications) in Npgsql.dll:token 0x6000686+0x453
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.ExecutionContextCallback(Object s) in System.Private.CoreLib.dll:token 0x6004d76+0x0
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state) in System.Private.CoreLib.dll:token 0x6002df1+0x40
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext(Thread threadPoolThread) in System.Private.CoreLib.dll:token 0x6004d7a+0x3f
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext() in System.Private.CoreLib.dll:token 0x6004d79+0x0
+   at System.Threading.Tasks.AwaitTaskContinuation.RunOrScheduleAction(IAsyncStateMachineBox box, Boolean allowInlining) in System.Private.CoreLib.dll:token 0x60032ab+0x3b
+   at System.Threading.Tasks.Task.RunContinuations(Object continuationObject) in System.Private.CoreLib.dll:token 0x60031bd+0x65
+   at System.Threading.Tasks.Task.FinishContinuations() in System.Private.CoreLib.dll:token 0x60031bc+0x14
+   at System.Threading.Tasks.Task`1.TrySetResult(TResult result) in System.Private.CoreLib.dll:token 0x600309b+0x4b
+   at System.Threading.Tasks.ValueTask`1.ValueTaskSourceAsTask.<>c.<.cctor>b__4_0(Object state) in System.Private.CoreLib.dll:token 0x60033bf+0x23
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.InvokeContinuation(Action`1 continuation, Object state, Boolean forceAsync, Boolean requiresExecutionContextFlow) in System.Net.Sockets.dll:token 0x60002b2+0x82
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.OnCompleted(SocketAsyncEventArgs _) in System.Net.Sockets.dll:token 0x60002a5+0x42
+   at System.Net.Sockets.SocketAsyncEventArgs.OnCompletedInternal() in System.Net.Sockets.dll:token 0x60002dd+0x12
+   at System.Net.Sockets.SocketAsyncEventArgs.FinishOperationAsyncSuccess(Int32 bytesTransferred, SocketFlags flags) in System.Net.Sockets.dll:token 0x6000306+0x12
+   at System.Net.Sockets.SocketAsyncEventArgs.CompletionCallback(Int32 bytesTransferred, SocketFlags flags, SocketError socketError) in System.Net.Sockets.dll:token 0x6000325+0x3
+   at System.Net.Sockets.SocketAsyncEventArgs.TransferCompletionCallbackCore(Int32 bytesTransferred, Byte[] socketAddress, Int32 socketAddressSize, SocketFlags receivedFlags, SocketError socketError) in System.Net.Sockets.dll:token 0x6000315+0xd
+   at System.Net.Sockets.SocketAsyncContext.OperationQueue`1.ProcessAsyncOperation(TOperation op) in System.Net.Sockets.dll:token 0x6000472+0x0
+   at System.Net.Sockets.SocketAsyncContext.ReadOperation.System.Threading.IThreadPoolWorkItem.Execute() in System.Net.Sockets.dll:token 0x6000437+0x0
+   at System.Net.Sockets.SocketAsyncContext.HandleEvents(SocketEvents events) in System.Net.Sockets.dll:token 0x6000424+0x32
+   at System.Net.Sockets.SocketAsyncEngine.System.Threading.IThreadPoolWorkItem.Execute() in System.Net.Sockets.dll:token 0x6000482+0x25
+   at System.Threading.ThreadPoolWorkQueue.Dispatch() in System.Private.CoreLib.dll:token 0x6002f41+0xa0
+   at System.Threading.PortableThreadPool.WorkerThread.WorkerThreadStart() in System.Private.CoreLib.dll:token 0x600303b+0x67
+   at System.Threading.Thread.StartCallback() in System.Private.CoreLib.dll:token 0x6002bb9+0xe
+--- End of stack trace from previous location ---
+   at Npgsql.NpgsqlConnector.ConnectAsync(NpgsqlTimeout timeout, CancellationToken cancellationToken) in Npgsql.dll:token 0x6000432+0x284
+   at Npgsql.NpgsqlConnector.ConnectAsync(NpgsqlTimeout timeout, CancellationToken cancellationToken) in Npgsql.dll:token 0x6000432+0x315
+   at Npgsql.NpgsqlConnector.RawOpen(NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken) in Npgsql.dll:token 0x6000430+0x98
+   at Npgsql.NpgsqlConnector.Open(NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken) in Npgsql.dll:token 0x600042c+0x9e
+   at Npgsql.ConnectorPool.OpenNewConnector(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken) in Npgsql.dll:token 0x60001fd+0xd9
+   at Npgsql.ConnectorPool.<>c__DisplayClass38_0.<<Rent>g__RentAsync|0>d.MoveNext() in Npgsql.dll:token 0x60010cb+0x92
+--- End of stack trace from previous location ---
+   at Npgsql.NpgsqlConnection.<>c__DisplayClass41_0.<<Open>g__OpenAsync|0>d.MoveNext() in Npgsql.dll:token 0x60010d1+0x236
+--- End of stack trace from previous location ---
+   at CommentApi.Sql.MigrateSqlService.StartAsync(CancellationToken cancellationToken) in /home/hackathon/hackathonSeznamEasyPeasy/CommentApi/CommentApi/Sql/MigrateSqlService.cs:line 36
+   at Microsoft.Extensions.Hosting.Internal.Host.StartAsync(CancellationToken cancellationToken) in Microsoft.Extensions.Hosting.dll:token 0x6000070+0x177
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync(IHost host, CancellationToken token) in Microsoft.Extensions.Hosting.Abstractions.dll:token 0x600001e+0x93
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync(IHost host, CancellationToken token) in Microsoft.Extensions.Hosting.Abstractions.dll:token 0x600001e+0x1be
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.Run(IHost host) in Microsoft.Extensions.Hosting.Abstractions.dll:token 0x600001d+0x15
+   at Program.Main(String[] args) in /home/hackathon/hackathonSeznamEasyPeasy/CommentApi/CommentApi/Program.cs:line 21
+./run.sh: line 11: 22300 Aborted                 (core dumped) dotnet ./bin/Release/net6.0/publish/CommentApi.dll --urls=http://0.0.0.0:8000
+Restoring packages
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+Building the project
+Microsoft (R) Build Engine version 17.0.0-preview-21378-03+d592862ed for .NET
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+  You are using a preview version of .NET. See: https://aka.ms/dotnet-core-preview
+  CommentApi -> /home/hackathon/hackathonSeznamEasyPeasy/CommentApi/CommentApi/bin/Release/net6.0/CommentApi.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:01.44
+Running the project
+Microsoft (R) Build Engine version 17.0.0-preview-21378-03+d592862ed for .NET
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+  CommentApi -> /home/hackathon/hackathonSeznamEasyPeasy/CommentApi/CommentApi/bin/Release/net6.0/publish/
+Running the project
+Unhandled exception. Npgsql.NpgsqlException (0x80004005): Exception while connecting
+ ---> System.Net.Sockets.SocketException (99): Cannot assign requested address
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.CreateException(SocketError error, Boolean forAsyncThrow) in System.Net.Sockets.dll:token 0x60002bb+0xa
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ConnectAsync(Socket socket) in System.Net.Sockets.dll:token 0x60002ae+0x32
+   at System.Net.Sockets.Socket.ConnectAsync(EndPoint remoteEP, CancellationToken cancellationToken) in System.Net.Sockets.dll:token 0x6000271+0x2f
+   at Npgsql.NpgsqlConnector.ConnectAsync(NpgsqlTimeout timeout, CancellationToken cancellationToken) in Npgsql.dll:token 0x6000432+0x21c
+   at System.Runtime.CompilerServices.AsyncMethodBuilderCore.Start[TStateMachine](TStateMachine& stateMachine) in System.Private.CoreLib.dll:token 0x6004d4b+0x28
+   at Npgsql.NpgsqlConnector.ConnectAsync(NpgsqlTimeout timeout, CancellationToken cancellationToken) in Npgsql.dll:token 0x6000432+0x2c
+   at Npgsql.NpgsqlConnector.RawOpen(NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken) in Npgsql.dll:token 0x6000430+0x38
+   at System.Runtime.CompilerServices.AsyncMethodBuilderCore.Start[TStateMachine](TStateMachine& stateMachine) in System.Private.CoreLib.dll:token 0x6004d4b+0x28
+   at Npgsql.NpgsqlConnector.RawOpen(NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken) in Npgsql.dll:token 0x6000430+0x34
+   at Npgsql.NpgsqlConnector.Open(NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken) in Npgsql.dll:token 0x600042c+0x38
+   at System.Runtime.CompilerServices.AsyncMethodBuilderCore.Start[TStateMachine](TStateMachine& stateMachine) in System.Private.CoreLib.dll:token 0x6004d4b+0x28
+   at Npgsql.NpgsqlConnector.Open(NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken) in Npgsql.dll:token 0x600042c+0x34
+   at Npgsql.ConnectorPool.OpenNewConnector(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken) in Npgsql.dll:token 0x60001fd+0x66
+   at System.Runtime.CompilerServices.AsyncMethodBuilderCore.Start[TStateMachine](TStateMachine& stateMachine) in System.Private.CoreLib.dll:token 0x6004d4b+0x28
+   at Npgsql.ConnectorPool.OpenNewConnector(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken) in Npgsql.dll:token 0x60001fd+0x3d
+   at Npgsql.ConnectorPool.<>c__DisplayClass38_0.<<Rent>g__RentAsync|0>d.MoveNext() in Npgsql.dll:token 0x60010cb+0x11
+   at System.Runtime.CompilerServices.AsyncMethodBuilderCore.Start[TStateMachine](TStateMachine& stateMachine) in System.Private.CoreLib.dll:token 0x6004d4b+0x28
+   at Npgsql.ConnectorPool.<>c__DisplayClass38_0.<Rent>g__RentAsync|0() in Npgsql.dll:token 0x6000d8d+0x1c
+   at Npgsql.ConnectorPool.Rent(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken) in Npgsql.dll:token 0x60001fa+0x38
+   at Npgsql.NpgsqlConnection.<>c__DisplayClass41_0.<<Open>g__OpenAsync|0>d.MoveNext() in Npgsql.dll:token 0x60010d1+0x1b9
+   at System.Runtime.CompilerServices.AsyncMethodBuilderCore.Start[TStateMachine](TStateMachine& stateMachine) in System.Private.CoreLib.dll:token 0x6004d4b+0x28
+   at Npgsql.NpgsqlConnection.<>c__DisplayClass41_0.<Open>g__OpenAsync|0(CancellationToken cancellationToken2) in Npgsql.dll:token 0x6000dd7+0x24
+   at Npgsql.NpgsqlConnection.Open(Boolean async, CancellationToken cancellationToken) in Npgsql.dll:token 0x60002d6+0xad
+   at Npgsql.NpgsqlConnection.OpenAsync(CancellationToken cancellationToken) in Npgsql.dll:token 0x60002d4+0x6
+   at System.Data.Common.DbConnection.OpenAsync() in System.Data.Common.dll:token 0x6001695+0x0
+   at CommentApi.Sql.MigrateSqlService.StartAsync(CancellationToken cancellationToken) in /home/hackathon/hackathonSeznamEasyPeasy/CommentApi/CommentApi/Sql/MigrateSqlService.cs:line 36
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.ExecutionContextCallback(Object s) in System.Private.CoreLib.dll:token 0x6004d76+0x0
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state) in System.Private.CoreLib.dll:token 0x6002df1+0x40
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext(Thread threadPoolThread) in System.Private.CoreLib.dll:token 0x6004d7a+0x3f
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext() in System.Private.CoreLib.dll:token 0x6004d79+0x0
+   at System.Threading.Tasks.AwaitTaskContinuation.RunOrScheduleAction(IAsyncStateMachineBox box, Boolean allowInlining) in System.Private.CoreLib.dll:token 0x60032ab+0x3b
+   at System.Threading.Tasks.Task.RunContinuations(Object continuationObject) in System.Private.CoreLib.dll:token 0x60031bd+0x65
+   at System.Threading.Tasks.Task.FinishContinuations() in System.Private.CoreLib.dll:token 0x60031bc+0x14
+   at System.Threading.Tasks.Task`1.TrySetResult(TResult result) in System.Private.CoreLib.dll:token 0x600309b+0x4b
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.SetExistingTaskResult(Task`1 task, TResult result) in System.Private.CoreLib.dll:token 0x6004d6e+0x0
+   at Npgsql.NpgsqlCommand.ExecuteNonQuery(Boolean async, CancellationToken cancellationToken) in Npgsql.dll:token 0x6000297+0x24d
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.ExecutionContextCallback(Object s) in System.Private.CoreLib.dll:token 0x6004d76+0x0
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state) in System.Private.CoreLib.dll:token 0x6002df1+0x40
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext(Thread threadPoolThread) in System.Private.CoreLib.dll:token 0x6004d7a+0x3f
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext() in System.Private.CoreLib.dll:token 0x6004d79+0x0
+   at System.Threading.Tasks.AwaitTaskContinuation.RunOrScheduleAction(IAsyncStateMachineBox box, Boolean allowInlining) in System.Private.CoreLib.dll:token 0x60032ab+0x3b
+   at System.Threading.Tasks.Task.RunContinuations(Object continuationObject) in System.Private.CoreLib.dll:token 0x60031bd+0x65
+   at System.Threading.Tasks.Task.FinishContinuations() in System.Private.CoreLib.dll:token 0x60031bc+0x14
+   at System.Threading.Tasks.Task`1.TrySetResult(TResult result) in System.Private.CoreLib.dll:token 0x600309b+0x4b
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken) in Npgsql.dll:token 0x60002a1+0x635
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.ExecutionContextCallback(Object s) in System.Private.CoreLib.dll:token 0x6004d76+0x0
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state) in System.Private.CoreLib.dll:token 0x6002df1+0x40
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext(Thread threadPoolThread) in System.Private.CoreLib.dll:token 0x6004d7a+0x3f
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext() in System.Private.CoreLib.dll:token 0x6004d79+0x0
+   at System.Threading.Tasks.AwaitTaskContinuation.RunOrScheduleAction(IAsyncStateMachineBox box, Boolean allowInlining) in System.Private.CoreLib.dll:token 0x60032ab+0x3b
+   at System.Threading.Tasks.Task.RunContinuations(Object continuationObject) in System.Private.CoreLib.dll:token 0x60031bd+0x65
+   at System.Threading.Tasks.Task.FinishContinuations() in System.Private.CoreLib.dll:token 0x60031bc+0x14
+   at System.Threading.Tasks.Task`1.TrySetResult(TResult result) in System.Private.CoreLib.dll:token 0x600309b+0x4b
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.SetExistingTaskResult(Task`1 task, TResult result) in System.Private.CoreLib.dll:token 0x6004d6e+0x0
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken) in Npgsql.dll:token 0x60004db+0x960
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.ExecutionContextCallback(Object s) in System.Private.CoreLib.dll:token 0x6004d76+0x0
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state) in System.Private.CoreLib.dll:token 0x6002df1+0x40
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext(Thread threadPoolThread) in System.Private.CoreLib.dll:token 0x6004d7a+0x3f
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext() in System.Private.CoreLib.dll:token 0x6004d79+0x0
+   at System.Threading.Tasks.AwaitTaskContinuation.RunOrScheduleAction(IAsyncStateMachineBox box, Boolean allowInlining) in System.Private.CoreLib.dll:token 0x60032ab+0x3b
+   at System.Threading.Tasks.Task.RunContinuations(Object continuationObject) in System.Private.CoreLib.dll:token 0x60031bd+0x65
+   at System.Threading.Tasks.Task.FinishContinuations() in System.Private.CoreLib.dll:token 0x60031bc+0x14
+   at System.Threading.Tasks.Task`1.TrySetResult(TResult result) in System.Private.CoreLib.dll:token 0x600309b+0x4b
+   at Npgsql.NpgsqlConnector.<ReadMessage>g__ReadMessageLong|194_0(NpgsqlConnector connector, Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage) in Npgsql.dll:token 0x6000484+0x51d
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.ExecutionContextCallback(Object s) in System.Private.CoreLib.dll:token 0x6004d76+0x0
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state) in System.Private.CoreLib.dll:token 0x6002df1+0x40
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext(Thread threadPoolThread) in System.Private.CoreLib.dll:token 0x6004d7a+0x3f
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext() in System.Private.CoreLib.dll:token 0x6004d79+0x0
+   at System.Threading.Tasks.AwaitTaskContinuation.RunOrScheduleAction(IAsyncStateMachineBox box, Boolean allowInlining) in System.Private.CoreLib.dll:token 0x60032ab+0x3b
+   at System.Threading.Tasks.Task.RunContinuations(Object continuationObject) in System.Private.CoreLib.dll:token 0x60031bd+0x65
+   at System.Threading.Tasks.Task.FinishContinuations() in System.Private.CoreLib.dll:token 0x60031bc+0x14
+   at System.Threading.Tasks.Task`1.TrySetResult(TResult result) in System.Private.CoreLib.dll:token 0x600309b+0x4b
+   at Npgsql.NpgsqlReadBuffer.<Ensure>g__EnsureLong|40_0(NpgsqlReadBuffer buffer, Int32 count, Boolean async, Boolean readingNotifications) in Npgsql.dll:token 0x6000686+0x453
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.ExecutionContextCallback(Object s) in System.Private.CoreLib.dll:token 0x6004d76+0x0
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state) in System.Private.CoreLib.dll:token 0x6002df1+0x40
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext(Thread threadPoolThread) in System.Private.CoreLib.dll:token 0x6004d7a+0x3f
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext() in System.Private.CoreLib.dll:token 0x6004d79+0x0
+   at System.Threading.Tasks.AwaitTaskContinuation.RunOrScheduleAction(IAsyncStateMachineBox box, Boolean allowInlining) in System.Private.CoreLib.dll:token 0x60032ab+0x3b
+   at System.Threading.Tasks.Task.RunContinuations(Object continuationObject) in System.Private.CoreLib.dll:token 0x60031bd+0x65
+   at System.Threading.Tasks.Task.FinishContinuations() in System.Private.CoreLib.dll:token 0x60031bc+0x14
+   at System.Threading.Tasks.Task`1.TrySetResult(TResult result) in System.Private.CoreLib.dll:token 0x600309b+0x4b
+   at System.Threading.Tasks.ValueTask`1.ValueTaskSourceAsTask.<>c.<.cctor>b__4_0(Object state) in System.Private.CoreLib.dll:token 0x60033bf+0x23
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.InvokeContinuation(Action`1 continuation, Object state, Boolean forceAsync, Boolean requiresExecutionContextFlow) in System.Net.Sockets.dll:token 0x60002b2+0x82
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.OnCompleted(SocketAsyncEventArgs _) in System.Net.Sockets.dll:token 0x60002a5+0x42
+   at System.Net.Sockets.SocketAsyncEventArgs.OnCompletedInternal() in System.Net.Sockets.dll:token 0x60002dd+0x12
+   at System.Net.Sockets.SocketAsyncEventArgs.FinishOperationAsyncSuccess(Int32 bytesTransferred, SocketFlags flags) in System.Net.Sockets.dll:token 0x6000306+0x12
+   at System.Net.Sockets.SocketAsyncEventArgs.CompletionCallback(Int32 bytesTransferred, SocketFlags flags, SocketError socketError) in System.Net.Sockets.dll:token 0x6000325+0x3
+   at System.Net.Sockets.SocketAsyncEventArgs.TransferCompletionCallbackCore(Int32 bytesTransferred, Byte[] socketAddress, Int32 socketAddressSize, SocketFlags receivedFlags, SocketError socketError) in System.Net.Sockets.dll:token 0x6000315+0xd
+   at System.Net.Sockets.SocketAsyncContext.OperationQueue`1.ProcessAsyncOperation(TOperation op) in System.Net.Sockets.dll:token 0x6000472+0x0
+   at System.Net.Sockets.SocketAsyncContext.ReadOperation.System.Threading.IThreadPoolWorkItem.Execute() in System.Net.Sockets.dll:token 0x6000437+0x0
+   at System.Net.Sockets.SocketAsyncContext.HandleEvents(SocketEvents events) in System.Net.Sockets.dll:token 0x6000424+0x32
+   at System.Net.Sockets.SocketAsyncEngine.System.Threading.IThreadPoolWorkItem.Execute() in System.Net.Sockets.dll:token 0x6000482+0x25
+   at System.Threading.ThreadPoolWorkQueue.Dispatch() in System.Private.CoreLib.dll:token 0x6002f41+0xa0
+   at System.Threading.PortableThreadPool.WorkerThread.WorkerThreadStart() in System.Private.CoreLib.dll:token 0x600303b+0x67
+   at System.Threading.Thread.StartCallback() in System.Private.CoreLib.dll:token 0x6002bb9+0xe
+--- End of stack trace from previous location ---
+   at Npgsql.NpgsqlConnector.ConnectAsync(NpgsqlTimeout timeout, CancellationToken cancellationToken) in Npgsql.dll:token 0x6000432+0x284
+   at Npgsql.NpgsqlConnector.ConnectAsync(NpgsqlTimeout timeout, CancellationToken cancellationToken) in Npgsql.dll:token 0x6000432+0x315
+   at Npgsql.NpgsqlConnector.RawOpen(NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken) in Npgsql.dll:token 0x6000430+0x98
+   at Npgsql.NpgsqlConnector.Open(NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken) in Npgsql.dll:token 0x600042c+0x9e
+   at Npgsql.ConnectorPool.OpenNewConnector(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken) in Npgsql.dll:token 0x60001fd+0xd9
+   at Npgsql.ConnectorPool.<>c__DisplayClass38_0.<<Rent>g__RentAsync|0>d.MoveNext() in Npgsql.dll:token 0x60010cb+0x92
+--- End of stack trace from previous location ---
+   at Npgsql.NpgsqlConnection.<>c__DisplayClass41_0.<<Open>g__OpenAsync|0>d.MoveNext() in Npgsql.dll:token 0x60010d1+0x236
+--- End of stack trace from previous location ---
+   at CommentApi.Sql.MigrateSqlService.StartAsync(CancellationToken cancellationToken) in /home/hackathon/hackathonSeznamEasyPeasy/CommentApi/CommentApi/Sql/MigrateSqlService.cs:line 36
+   at Microsoft.Extensions.Hosting.Internal.Host.StartAsync(CancellationToken cancellationToken) in Microsoft.Extensions.Hosting.dll:token 0x6000070+0x177
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync(IHost host, CancellationToken token) in Microsoft.Extensions.Hosting.Abstractions.dll:token 0x600001e+0x93
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync(IHost host, CancellationToken token) in Microsoft.Extensions.Hosting.Abstractions.dll:token 0x600001e+0x1be
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.Run(IHost host) in Microsoft.Extensions.Hosting.Abstractions.dll:token 0x600001d+0x15
+   at Program.Main(String[] args) in /home/hackathon/hackathonSeznamEasyPeasy/CommentApi/CommentApi/Program.cs:line 21
+./run.sh: line 11: 22407 Aborted                 (core dumped) dotnet ./bin/Release/net6.0/publish/CommentApi.dll --urls=http://0.0.0.0:8000

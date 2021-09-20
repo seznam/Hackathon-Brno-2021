@@ -1,0 +1,9 @@
+fragment leafCommentsConnectionFields on CommentsConnection {
+  ...connectionFields
+  edges {
+    ...edgeFields
+    node {
+      ...commentFields
+    }
+  }
+}

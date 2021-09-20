@@ -1,0 +1,7 @@
+query Comments($context: URL!, $first: Int!, $after: Cursor) {
+  webPage(location: $context) {
+    comments(first: $first, after: $after) {
+      ...leafCommentsConnectionFields
+    }
+  }
+}

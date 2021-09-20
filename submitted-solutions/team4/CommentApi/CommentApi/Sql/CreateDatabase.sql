@@ -1,0 +1,3 @@
+﻿DROP DATABASE IF EXISTS Comments;
+
+CREATE DATABASE Comments;

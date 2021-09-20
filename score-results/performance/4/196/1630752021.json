@@ -1,0 +1,1 @@
+{"team":4,"run":196,"timestampSince":1630752011026,"timestampUntil":1630752021032,"score":-71879,"scoreDelta":-71879,"conccurency":8,"tests":511523,"operations":3896,"readOperations":68,"writeOperations":3828,"readTimeouts":0,"writeTimeouts":58,"persistenceTimeouts":0,"failures":0,"crashes":5013}

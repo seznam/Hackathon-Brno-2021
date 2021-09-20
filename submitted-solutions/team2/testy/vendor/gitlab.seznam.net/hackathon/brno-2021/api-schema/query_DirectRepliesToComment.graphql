@@ -1,0 +1,11 @@
+query DirectRepliesToComment(
+  $context: URL!,
+  $repliesCursor: Cursor!,
+  $first: Int!
+) {
+  webPage(location: $context) {
+    comments(first: $first, after: $repliesCursor) {
+      ...leafCommentsConnectionFields
+    }
+  }
+}

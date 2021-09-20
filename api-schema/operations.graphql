@@ -1,0 +1,135 @@
+query Comments($context: URL!, $first: Int!, $after: Cursor) {
+  webPage(location: $context) {
+    comments(first: $first, after: $after) {
+      ...leafCommentsConnectionFields
+    }
+  }
+}
+
+query CommentsWithDirectReplies(
+  $context: URL!,
+  $first: Int!,
+  $after: Cursor,
+  $firstReplies: Int!
+) {
+  webPage(location: $context) {
+    comments(first: $first, after: $after) {
+      ...connectionFields
+      edges {
+        ...edgeFields
+        node {
+          ...commentFields
+          replies(first: $firstReplies) {
+            ...leafCommentsConnectionFields
+          }
+        }
+      }
+    }
+  }
+}
+
+query CommentsWithDeepReplies(
+  $context: URL!,
+  $first: Int!,
+  $after: Cursor,
+  $firstReplies1stLevel: Int!,
+  $firstReplies2ndLevel: Int!,
+  $firstReplies3rdLevel: Int!
+) {
+  webPage(location: $context) {
+    comments(first: $first, after: $after) {
+      ...connectionFields
+      edges {
+        ...edgeFields
+        node {
+          ...commentFields
+          replies(first: $firstReplies1stLevel) {
+            ...connectionFields
+            edges {
+              ...edgeFields
+              node {
+                ...commentFields
+                replies(first: $firstReplies2ndLevel) {
+                  ...connectionFields
+                  edges {
+                    ...edgeFields
+                    node {
+                      ...commentFields
+                      replies(first: $firstReplies3rdLevel) {
+                        ...leafCommentsConnectionFields
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+query DirectRepliesToComment(
+  $context: URL!,
+  $repliesCursor: Cursor!,
+  $first: Int!
+) {
+  webPage(location: $context) {
+    comments(first: $first, after: $repliesCursor) {
+      ...leafCommentsConnectionFields
+    }
+  }
+}
+
+query SingleComment($id: ID!) {
+  node(id: $id) {
+    ...commentFields
+  }
+}
+
+mutation PostComment($context: URL!, $comment: CommentInput!) {
+  postComment(context: $context, comment: $comment) {
+    ...commentFields
+  }
+}
+
+mutation DeleteAllComments {
+  deleteAllComments
+}
+
+fragment leafCommentsConnectionFields on CommentsConnection {
+  ...connectionFields
+  edges {
+    ...edgeFields
+    node {
+      ...commentFields
+    }
+  }
+}
+
+fragment commentFields on Comment {
+  id
+  parent {
+    id
+  }
+  author
+  text
+  created
+  repliesStartCursor
+}
+
+fragment connectionFields on Connection {
+  pageInfo {
+    ...pageInfoFields
+  }
+}
+
+fragment edgeFields on Edge {
+  cursor
+}
+
+fragment pageInfoFields on PageInfo {
+  hasNextPage
+  endCursor
+}

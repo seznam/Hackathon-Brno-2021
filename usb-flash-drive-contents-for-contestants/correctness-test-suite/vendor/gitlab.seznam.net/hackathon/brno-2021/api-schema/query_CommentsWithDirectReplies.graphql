@@ -1,0 +1,21 @@
+query CommentsWithDirectReplies(
+  $context: URL!,
+  $first: Int!,
+  $after: Cursor,
+  $firstReplies: Int!
+) {
+  webPage(location: $context) {
+    comments(first: $first, after: $after) {
+      ...connectionFields
+      edges {
+        ...edgeFields
+        node {
+          ...commentFields
+          replies(first: $firstReplies) {
+            ...leafCommentsConnectionFields
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,422 @@
+openapi: 3.0.1
+info:
+  title: Comments
+  description: REST API for managing comments related to web pages.
+  version: 1.0.0
+servers:
+- url: http://localhost:8000/
+tags:
+- name: comment
+paths:
+  /webPage/{location}/comment:
+    get:
+      tags:
+      - comment
+      summary:
+        Used to retrieve comments related to the specified web page. The
+        returned comments are chronologically sorted from the oldest to the
+        newest. The method returns the beginning of root comments if no "after"
+        cursor is provided.
+      parameters:
+      - name: location
+        in: path
+        description:
+          URL of the web page for which the comments should be retrieved. No
+          URL normalization is required or expected from the API.
+        required: true
+        schema:
+          $ref: '#/components/schemas/URL'
+      - name: limit
+        in: query
+        description:
+          The maximum number of top-level (relative to the level referenced by
+          the cursor) comments to retrieve. The limit must be a positive
+          integer that fits within the range of a 32-bit signed integer (up to
+          2 147 483 647).
+        required: true
+        schema:
+          type: number
+          format: int32
+          minimum: 1
+      - name: after
+        in: query
+        description:
+          Cursor pointing to a comment (which can be either top-level or a
+          reply). The API must return comments created after the referenced
+          comments and at the referenced comment's level within the tree of
+          comments related to the web page.
+        schema:
+          $ref: '#/components/schemas/Cursor'
+      - name: replies1stLevelLimit
+        in: query
+        description:
+          The maximum number of direct replies to top level of the returned
+          comments to return. The returned top-level comments won't have the
+          replies property set if this parameter is omitted.
+        schema:
+          type: number
+          format: int32
+          minimum: 1
+      - name: replies2ndLevelLimit
+        in: query
+        description:
+          The maximum number of replies to replies to top-level returned
+          comments to return. The 1st level replies won't have the replies
+          property set if this parameter is omitted.
+        schema:
+          type: number
+          format: int32
+          minimum: 1
+      - name: replies3rdLevelLimit
+        in: query
+        description:
+          The maximum number of 3rd-level replies (replies to replies to
+          replies) to top-level returned comments to return. The 2nd level
+          replies won't have the relies property set if this parameter is
+          omitted.
+        schema:
+          type: number
+          format: int32
+          minimum: 1
+      responses:
+        200:
+          description: The requested comments.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommentsConnection'
+        400:
+          description:
+            The input parameters are invalid (e.g. negative or zero limit or a
+            malformed cursor) or do not make sense (e.g. replies2ndLevelLimit
+            is set, but replies1stLevelLimit is missing).
+
+    post:
+      tags:
+      - comment
+      summary: Posts a new comment related to the specified web page.
+      parameters:
+      - name: location
+        in: path
+        description: URL of the web page for which the comment is being posted.
+        required: true
+        schema:
+          $ref: '#/components/schemas/URL'
+      requestBody:
+        description: Data of a comment to post.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommentInput'
+      responses:
+        201:
+          description:
+            The created comment. While the comment's ID must be generated
+            synchronously, the comment itself may be persisted at a later
+            moment.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Comment'
+        400:
+          description:
+            The comment data is invalid, e.g. the text is too long or the
+            specified parent does not exist or is related to a different web
+            page.
+
+  /comment/{id}:
+    get:
+      tags:
+      - comment
+      summary: Used to retrieve a single comment.
+      parameters:
+      - name: id
+        in: path
+        description: ID of the comment to retrieve.
+        required: true
+        schema:
+          $ref: '#/components/schemas/ID'
+      responses:
+        200:
+          description: The requested comment.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Comment'
+        404:
+          description:
+            The comment either does not exist yet or has not been persisted yet
+            (applies only if comments are not persisted synchronously and the
+            API is unable to query the queue of comments to persist).
+
+  /comment:
+    delete:
+      tags:
+      - comment
+      summary: Used to delete all comments.
+      responses:
+        204:
+          description:
+            Confirmation that all comments (persisted and enqueued to be
+            persisted) have been deleted.
+
+  /batch:
+    post:
+      tags:
+      - comment
+      summary:
+        Used to perform multiple operations in one request. Only read
+        operations are supported.
+      requestBody:
+        description: The operations to perform.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BatchInput'
+      responses:
+        200:
+          description:
+            Results of all of the requested operations, in order matching the
+            requested operations.
+          content:
+            application/jsn:
+              schema:
+                $ref: '#/components/schemas/BatchResult'
+        400:
+          description:
+            Returned if any of the requested operations would result in a 4xx
+            status code (except for 404 from fetching a single comment).
+
+components:
+  schemas:
+    ID:
+      type: string
+      description:
+        Unique identifier of a record. This can be any non-empty string of up
+        to 36 bytes (36 bytes length is derived from the UUID textual
+        representation) when using UTF-8 encoding.
+      minLength: 1
+      maxLength: 36
+
+    MillisecondUnixTimestamp:
+      type: integer
+      format: int32
+      description:
+        Int representing a UNIX timestamp with millisecond precision.
+
+    URL:
+      type: string
+      description:
+        String containing a valid URL to a website (with either https or http
+        protocol).
+
+    Cursor:
+      type: string
+      description:
+        String containing information needed for pagination. This is usually
+        some info encoded using base64, but the server can use anything it
+        needs or prefers.
+
+    Node:
+      type: object
+      description:
+        An object with an ID unique across all records available via this API.
+        UUID (v1, v2 or v5) is recommended.
+      properties:
+        id:
+          # The universally unique identifier of this record.
+          $ref: '#/components/schemas/ID'
+      required:
+      - id
+
+    PageInfo:
+      type: object
+      description: Pagination-related information.
+      properties:
+        hasNextPage:
+          type: boolean
+          description:
+            True iff there is another page of records available at the moment
+            the information was retrieved. The endCursor must be non-null if
+            this flag is true.
+        endCursor:
+          # The cursor pointing to the end of the current page of records, used
+          # to access the next page.
+          $ref: '#/components/schemas/Cursor'
+      required:
+      - hasNextPage
+
+    Connection:
+      type: object
+      description: Properties shared by all record connections.
+      properties:
+        pageInfo:
+          # Pagination-related information.
+          $ref: '#/components/schemas/PageInfo'
+      required:
+      - pageInfo
+
+    Edge:
+      type: object
+      description:
+        Properties shared by all connection edges in the graph of records.
+      properties:
+        cursor:
+          # Cursor pointing to this edge in the current pagination context.
+          # Used to retrieve records immediately following this one. The API
+          # must preserve the current records ordering when requesting
+          # following records using this cursor.
+          $ref: '#/components/schemas/Cursor'
+      required:
+      - cursor
+
+    CommentsConnection:
+      type: object
+      description:
+        Records connection containing a single page of comment records.
+      allOf:
+      - $ref: '#/components/schemas/Connection'
+      properties:
+        edges:
+          type: array
+          items:
+            $ref: '#/components/schemas/CommentsEdge'
+      required:
+      - edges
+
+    CommentsEdge:
+      type: object
+      description:
+        Edge of a comment records connection referencing a single comment.
+      allOf:
+      - $ref: '#/components/schemas/Edge'
+      properties:
+        node:
+          $ref: '#/components/schemas/Comment'
+      required:
+      - node
+
+    CommentData:
+      type: object
+      description: Common data related to a single comment.
+      properties:
+        author:
+          # Unique identifier of the comment's author. This can be any
+          # non-empty string of up to 36 bytes when using UTF-8 encoding.
+          $ref: '#/components/schemas/ID'
+        text:
+          type: string
+          description:
+            Comment's actual content. The content must be at least 5 bytes
+            long, may contain any valid Unicode characters and can be up to
+            128 KiB long when using UTF-8 encoding.
+      required:
+      - author
+      - text
+
+    Comment:
+      type: object
+      description:
+        Record representing a persisted (or soon-to-be persisted) comment.
+      allOf:
+      - $ref: '#/components/schemas/Node'
+      - $ref: '#/components/schemas/CommentData'
+      properties:
+        parent:
+          # ID of the comment this comment is a reply to. Set to null for root
+          # comments (comments that are not replies to other comments).
+          $ref: '#/components/schemas/Node'
+        created:
+          # The UNIX timestamp with millisecond precision of the moment the
+          # comment has been accepted by the API. Note the comment may be
+          # persisted at a later moment.
+          $ref: '#/components/schemas/MillisecondUnixTimestamp'
+        repliesStartCursor:
+          # A cursor that can be used to retrieve the direct replies to this
+          # comment (this is an alternative to requesting the replies field).
+          # The comments returned when using this cursor are chronologically
+          # sorted from the oldest to the newest.
+          $ref: '#/components/schemas/Cursor'
+        replies:
+          # Contains the direct replies to this comment (if requested,
+          # otherwise null or omitted). The returned comments are
+          # chronologically sorted from the oldest to the newest. Replies to
+          # the returned comments can be retrieved using the replies field of
+          # the returned comments (if requested) or using their
+          # repliesStartCursor cursors.
+          $ref: '#/components/schemas/CommentsConnection'
+      required:
+      - created
+      - repliesStartCursor
+
+    CommentInput:
+      type: object
+      description: A
+      allOf:
+      - $ref: '#/components/schemas/CommentData'
+      properties:
+        parent:
+          # Unique identifier of the comment to which this comment replies. Use
+          # null for root comments (comments that are not replies to other
+          # comments).
+          $ref: '#/components/schemas/ID'
+
+    GetCommentInput:
+      type: object
+      description:
+        Input for read operation for getting a single comment by its ID. Used
+        by the batch operation.
+      properties:
+        id:
+          $ref: '#/components/schemas/ID'
+      required:
+      - id
+
+    GetCommentsInput:
+      type: object
+      description:
+        Input for read operation for traversing the comments tree. Used by the
+        batch operation.
+      properties:
+        location:
+          $ref: '#/components/schemas/URL'
+        limit:
+          type: number
+          format: int32
+          minimum: 1
+        after:
+          $ref: '#/components/schemas/Cursor'
+        replies1stLevelLimit:
+          type: number
+          format: int32
+          minimum: 1
+        replies2ndLevelLimit:
+          type: number
+          format: int32
+          minimum: 1
+        replies3rdLevelLimit:
+          type: number
+          format: int32
+          minimum: 1
+      required:
+      - location
+      - limit
+
+    BatchInput:
+      type: array
+      description: Input for the batch operation.
+      items:
+        oneOf:
+        - $ref: '#/components/schemas/GetCommentInput'
+        - $ref: '#/components/schemas/GetCommentsInput'
+
+    BatchResult:
+      type: array
+      description:
+        Result of a successful call to the batch operation. If an operation to
+        fetch a single comment fails to locate the specified comment, the
+        result of the operation would be null.
+      items:
+        oneOf:
+        - $ref: '#/components/schemas/Comment'
+        - $ref: '#/components/schemas/CommentsConnection'

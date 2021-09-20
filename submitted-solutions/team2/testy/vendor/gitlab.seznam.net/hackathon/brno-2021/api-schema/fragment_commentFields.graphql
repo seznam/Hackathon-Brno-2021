@@ -1,0 +1,10 @@
+fragment commentFields on Comment {
+  id
+  parent {
+    id
+  }
+  author
+  text
+  created
+  repliesStartCursor
+}
