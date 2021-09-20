@@ -1,0 +1,5 @@
+query SingleComment($id: ID!) {
+  node(id: $id) {
+    ...commentFields
+  }
+}

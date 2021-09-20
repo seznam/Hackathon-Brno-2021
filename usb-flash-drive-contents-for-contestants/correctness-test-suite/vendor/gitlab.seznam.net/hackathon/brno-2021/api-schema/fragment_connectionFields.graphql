@@ -1,0 +1,5 @@
+fragment connectionFields on Connection {
+  pageInfo {
+    ...pageInfoFields
+  }
+}

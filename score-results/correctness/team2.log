@@ -1,0 +1,21 @@
+test 'PostCommentInvalidInputEmptyComment' using API adapter 'REST client, no gzip' completed with the result: passed
+test 'PostCommentInvalidInputEmptyContext' using API adapter 'REST client, no gzip' completed with the result: passed
+test 'PostCommentInvalidInputEmptyAuthor' using API adapter 'REST client, no gzip' completed with the result: passed
+test 'PostCommentInvalidInputExceededAuthor' using API adapter 'REST client, no gzip' completed with the result: passed
+test 'PostCommentInvalidInputEmptyText' using API adapter 'REST client, no gzip' completed with the result: passed
+test 'PostCommentInvalidInputExceededText' using API adapter 'REST client, no gzip' completed with the result: passed
+test 'PostCommentInvalidInputParent' using API adapter 'REST client, no gzip' completed with the result: passed
+test 'WebPageInvalidInputEmptyLocation' using API adapter 'REST client, no gzip' completed with the result: passed
+test 'WebPageInvalidInputCommentsNegativeFirst' using API adapter 'REST client, no gzip' completed with the result: passed
+test 'ValidCommentsInput' using API adapter 'REST client, no gzip' completed with the result: passed
+test 'ValidCommentsWithDirectRepliesInput' using API adapter 'REST client, no gzip' completed with the result: passed
+test 'ValidCommentsWithDeepRepliesInput' using API adapter 'REST client, no gzip' completed with the result: passed
+test 'ValidDirectRepliesToCommentInput' using API adapter 'REST client, no gzip' completed with the result: passed
+test 'ValidSingleCommentInput' using API adapter 'REST client, no gzip' completed with the result: passed
+test 'ValidSingleCommentsInput' using API adapter 'REST client, no gzip' completed with the result: passed
+test 'ValidPostCommentsInput' using API adapter 'REST client, no gzip' completed with the result: passed
+test 'NestingComments' using API adapter 'REST client, no gzip' completed with the result: passed
+test 'CommentsStructuralDataPagination' using API adapter 'REST client, no gzip' completed with the result: passed
+test 'DirectRepliesToCommentStructuralDataPagination' using API adapter 'REST client, no gzip' completed with the result: passed
+=============================================
+TESTS RESULTS: total=19, success=19, failed=0

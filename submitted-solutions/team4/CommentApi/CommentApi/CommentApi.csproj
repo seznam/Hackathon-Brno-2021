@@ -1,0 +1,36 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <None Remove="Sql\CreateDatabase.sql" />
+      <None Remove="Sql\CreateTable.sql" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Include="Sql\CreateDatabase.sql" />
+      <EmbeddedResource Include="Sql\CreateTable.sql" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Dapper" Version="2.0.90" />
+        <PackageReference Include="Microsoft.AspNetCore.Mvc.Abstractions" Version="2.2.0" />
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+        <PackageReference Include="Npgsql" Version="5.0.7" />
+        <PackageReference Include="prometheus-net.AspNetCore" Version="5.0.1" />
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+        <PackageReference Include="Utf8Json" Version="1.3.7" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Remove="Models\BatchInput.cs" />
+      <Compile Remove="Models\BatchResult.cs" />
+      <Compile Remove="Models\BatchResultItem.cs" />
+      <Compile Remove="Models\BatchResultItemJsonConverter.cs" />
+      <Compile Remove="Models\Edge.cs" />
+    </ItemGroup>
+
+</Project>

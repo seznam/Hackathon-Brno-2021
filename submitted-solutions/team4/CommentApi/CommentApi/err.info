@@ -1,0 +1,21 @@
+Restoring packages
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+Building the project
+Microsoft (R) Build Engine version 17.0.0-preview-21378-03+d592862ed for .NET
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+  You are using a preview version of .NET. See: https://aka.ms/dotnet-core-preview
+  CommentApi -> /home/hackathon/hackathonSeznamEasyPeasy/CommentApi/CommentApi/bin/Release/net6.0/CommentApi.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:01.23
+Running the project
+Microsoft (R) Build Engine version 17.0.0-preview-21378-03+d592862ed for .NET
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+  CommentApi -> /home/hackathon/hackathonSeznamEasyPeasy/CommentApi/CommentApi/bin/Release/net6.0/publish/
+Running the project

@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30907.101
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SeznamApi", "SeznamApi.csproj", "{797E2AC6-7B55-4E05-B441-6F71B5B3803E}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "SeznamDb", "..\SeznamDb\SeznamDb.sqlproj", "{74343EBD-611C-4F81-8C81-EC0C9AE8AB4E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{797E2AC6-7B55-4E05-B441-6F71B5B3803E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{797E2AC6-7B55-4E05-B441-6F71B5B3803E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{797E2AC6-7B55-4E05-B441-6F71B5B3803E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{797E2AC6-7B55-4E05-B441-6F71B5B3803E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{74343EBD-611C-4F81-8C81-EC0C9AE8AB4E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{74343EBD-611C-4F81-8C81-EC0C9AE8AB4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{74343EBD-611C-4F81-8C81-EC0C9AE8AB4E}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{74343EBD-611C-4F81-8C81-EC0C9AE8AB4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{74343EBD-611C-4F81-8C81-EC0C9AE8AB4E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{74343EBD-611C-4F81-8C81-EC0C9AE8AB4E}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4B252639-DEF7-48B9-8EBB-7734D23DE283}
+	EndGlobalSection
+EndGlobal

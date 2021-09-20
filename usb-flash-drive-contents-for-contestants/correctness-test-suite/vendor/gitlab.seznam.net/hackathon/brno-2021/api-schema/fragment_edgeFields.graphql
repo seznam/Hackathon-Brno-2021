@@ -1,0 +1,3 @@
+fragment edgeFields on Edge {
+  cursor
+}

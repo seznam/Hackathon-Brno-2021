@@ -1,0 +1,213 @@
+"""Int representing a UNIX timestamp with millisecond precision."""
+scalar MillisecondUnixTimestamp
+
+"""
+String containing a valid URL to a website (with either https or http
+protocol).
+"""
+scalar URL
+
+"""
+String containing information needed for pagination. This is usually some info
+encoded using base64, but the server can use anything it needs or prefers.
+"""
+scalar Cursor
+
+"""
+An object with an ID unique across all records available via this API. UUID
+(v1, v2 or v5) is recommended.
+"""
+interface Node {
+  """The universally unique identifier of this record."""
+  id: ID!
+}
+
+"""Pagination-related information."""
+type PageInfo {
+  """
+  True iff there is another page of records available at the moment the
+  information was retrieved. The endCursor must be non-null if this flag is
+  true.
+  """
+  hasNextPage: Boolean!
+
+  """
+  The cursor pointing to the end of the current page of records, used to access
+  the next page.
+  """
+  endCursor: Cursor
+}
+
+"""Properties shared by all record connections."""
+interface Connection {
+  """Pagination-related information."""
+  pageInfo: PageInfo!
+}
+
+"""Properties shared by all connection edges in the graph of records."""
+interface Edge {
+  """
+  Cursor pointing to this edge in the current pagination context. Used to
+  retrieve records immediately following this one. The API must preserve the
+  current records ordering when requesting following records using this cursor.
+  """
+  cursor: Cursor!
+}
+
+schema {
+  query: Query
+
+  mutation: Mutation
+}
+
+"""Queries supported by this API."""
+type Query {
+  """
+  Returns the web page record at the specified location denoted by the provided
+  URL. This is used to retrieve comments related to the given web page.
+  """
+  webPage(location: URL!): WebPage!
+
+  """
+  Retrieves any record by its unique identifier. Only support for comments is
+  required. Passing a URL as ID may return a WebPage.
+  """
+  node(id: ID!): Node
+}
+
+"""
+A virtual (non-persistent) record used to access comments related to a specific
+web page. The API does not validate that the web page's URL points to an actual
+existing web page accessing on the internet.
+"""
+type WebPage implements Node {
+  """
+  The web page's URL. Note that the URL may have virtually any length. No URL
+  normalization is required or expected from the API.
+  """
+  id: ID!
+
+  """
+  Retrieves the comments related to the current web page. The returned comments
+  are chronologically sorted from the oldest to the newest. The comments are of
+  a single reply-to hierarchy level, any replies to the returned comments must
+  be fetched via the replies Comment's field or using the repliesStartCursor.
+  The resolver returns the beginning of root comments if no cursor is provided.
+  The "first" argument must be a positive integer that fits within the range of
+  a 32-bit signed integer (up to 2 147 483 647).
+  """
+  comments(first: Int!, after: Cursor): CommentsConnection!
+}
+
+"""Records connection containing a single page of comment records."""
+type CommentsConnection implements Connection {
+  """Edges in the comment record connections graph."""
+  edges: [CommentsEdge!]!
+
+  pageInfo: PageInfo!
+}
+
+"""Edge of a comment records connection referencing a single comment."""
+type CommentsEdge implements Edge {
+  """The single comment record referenced by the connection edge."""
+  node: Comment!
+
+  cursor: Cursor!
+}
+
+"""
+Common data related to a single comment.
+"""
+interface CommentData {
+  """
+  Unique identifier of the comment's author. This can be any non-empty string
+  of up to 36 bytes (UUID textual representation) when using UTF-8 encoding.
+  """
+  author: ID!
+
+  """
+  Comment's actual content. The content must be at least 5 bytes long, may
+  contain any valid Unicode characters and can be up to 128 KiB long when using
+  UTF-8 encoding.
+  """
+  text: String!
+}
+
+"""Record representing a persisted (or soon-to-be persisted) comment."""
+type Comment implements Node & CommentData {
+  id: ID!
+
+  """
+  The comment to which this comment is a reply to. This field is null if this
+  is a root comment (not a reply to another comment).
+  """
+  parent: Comment
+
+  author: ID!
+
+  text: String!
+
+  """
+  The UNIX timestamp with millisecond precision of the moment the comment has
+  been accepted by the API. Note the comment may be persisted at a later
+  moment.
+  """
+  created: MillisecondUnixTimestamp!
+
+  """
+  A cursor that can be used to retrieve the direct replies to this comment
+  (this is an alternative to the replies resolver). The comments returned when
+  using this cursor are chronologically sorted from the oldest to the newest.
+  """
+  repliesStartCursor: Cursor!
+
+  """
+  Retrieves the direct replies to this comment. The returned comments are
+  chronologically sorted from the oldest to the newest. Replies to the returned
+  comments can be retrieved using the replies field of the returned comments or
+  using their repliesStartCursor cursors. The resolver returns the beginning of
+  replies if no cursor is provided.
+  The "first" argument must be a positive integer that fits within the range of
+  a 32-bit signed integer (up to 2 147 483 647).
+  """
+  replies(first: Int!, after: Cursor): CommentsConnection!
+}
+
+"""
+Input data type representing the required comment data for the postComment
+mutation.
+"""
+input CommentInput {
+  """
+  Unique identifier of the comment to which this comment replies. Use null for
+  root comments (comments that are not replies to other comments).
+  """
+  parent: ID
+
+  """
+  Unique identifier of the comment's author. This can be any non-empty string
+  of up to 36 bytes (UUID textual representation).
+  """
+  author: ID!
+
+  """
+  Comment's actual content. The content must be at least 5 bytes long, may
+  contain any valid Unicode characters and can be up to 128 KiB long.
+  """
+  text: String!
+}
+
+"""Mutations supported by this API."""
+type Mutation {
+  """
+  Persists the provided comment. While the comment's ID must be generated
+  synchronously, the comment itself may be persisted at a later moment.
+  """
+  postComment(context: URL!, comment: CommentInput!): Comment!
+
+  """
+  Deletes all persisted comments and comments scheduled for persisting. Returns
+  true iff the operation was successful.
+  """
+  deleteAllComments: Boolean!
+}

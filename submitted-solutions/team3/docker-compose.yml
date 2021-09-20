@@ -1,0 +1,48 @@
+version: '3'
+services:
+  mongo:
+    container_name: mongo
+    image: mongo:4.4.3
+    ports:
+      - 27017:27017
+    networks:
+      - hack
+
+  api:
+    container_name: api
+    image: api
+    build:
+      context: .
+      dockerfile: api.Dockerfile
+    networks:
+      - hack
+    depends_on:
+      - 'mongo'
+    environment:
+      - APP_DB_URL=mongodb://mongo:27017
+    volumes:
+      - '~/hack:/app/tmp'
+    ports:
+      - 8000:8000
+    # labels:
+    #   - 'traefik.enable=true'
+    #   - 'traefik.http.routers.api.rule=Host(`localhost`) || Host(`127.0.0.1`) || Host(`10.6.32.113`) || Host(`10.0.3.1`)  || Host(`team3`)'
+
+  # traefik:
+  #   image: 'traefik:v2.2'
+  #   container_name: 'traefik'
+  #   command:
+  #     - '--log.level=DEBUG'
+  #     - '--api=true'
+  #     - '--providers.docker=true'
+  #     - '--providers.docker.exposedbydefault=false'
+  #     - '--entrypoints.web.address=:8000'
+  #   ports:
+  #     - 8000:8000
+  #   networks:
+  #     - hack
+  #   volumes:
+  #     - /var/run/docker.sock:/var/run/docker.sock:ro
+
+networks:
+  hack:
